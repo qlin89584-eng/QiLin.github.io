@@ -2,43 +2,31 @@
 <html lang="zh-CN" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>电池修复排线型号列表 - HF电子科技</title>
     
-    <!-- 引入相同的样式和脚本 -->
+    <!-- 引入核心资源 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Tailwind 核心配置 -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: {
-                            DEFAULT: '#6C2BD9',
-                            dark: '#5A1BC7',
-                            light: '#8B5CF6'
-                        },
-                        secondary: {
-                            DEFAULT: '#F472B6',
-                            dark: '#EC4899',
-                            light: '#F9A8D4'
-                        },
-                        dark: {
-                            DEFAULT: '#1E1B4B',
-                            light: '#2E2B5A'
-                        },
-                        light: {
-                            DEFAULT: '#F8FAFC',
-                            dark: '#E2E8F0'
-                        }
+                        primary: { DEFAULT: '#6C2BD9', dark: '#5A1BC7', light: '#8B5CF6' },
+                        secondary: { DEFAULT: '#F472B6', dark: '#EC4899', light: '#F9A8D4' },
+                        dark: { DEFAULT: '#1E1B4B', light: '#2E2B5A' },
+                        light: { DEFAULT: '#F8FAFC', dark: '#E2E8F0' }
                     }
                 }
             }
         }
     </script>
     
+    <!-- 自定义样式（彻底修复无效单位和布局问题） -->
     <style type="text/tailwindcss">
         @layer utilities {
             .gradient-text {
@@ -51,16 +39,13 @@
                 background-image: radial-gradient(rgba(108, 43, 217, 0.05) 1px, transparent 1px);
                 background-size: 20px 20px;
             }
-            /* 匹配图片的Logo渐变样式 */
             .logo-gradient {
                 background: linear-gradient(90deg, #6C2BD9 0%, #F472B6 100%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
-            /* 二维码样式 - 适配三个二维码排列 */
-            .qrcode-item {
-                text-align: center;
-            }
+            /* 二维码样式 */
+            .qrcode-item { text-align: center; }
             .qrcode-img {
                 width: 120px;
                 height: 120px;
@@ -69,41 +54,36 @@
                 border-radius: 8px;
                 margin-bottom: 8px;
             }
-            /* 移动端三个二维码换行显示，桌面端横向排列 */
             .qrcode-container {
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 4px; /* 缩小间距适配三个二维码 */
+                gap: 4px;
             }
-            .qrcode-text {
-                color: #E2E8F0;
-                font-size: 14px;
-            }
-            /* 适配移动端：每排最多两个，第三个换行 */
+            .qrcode-text { color: #E2E8F0; font-size: 14px; }
+            /* 移动端二维码适配 */
             @media (max-width: 768px) {
-                .qrcode-container {
-                    gap: 8px;
-                }
-                .qrcode-item {
-                    flex: 0 0 calc(50% - 4px);
-                    max-width: calc(50% - 4px);
-                }
+                .qrcode-container { gap: 8px; }
+                .qrcode-item { flex: 0 0 calc(50% - 4px); max-width: calc(50% - 4px); }
             }
         }
-        
-        .card-hover {
-            transition: all 0.3s ease;
+
+        /* 基础重置与布局 */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F8FAFC;
+            color: #1E1B4B;
+            padding-top: 80px; /* 适配固定导航 */
+            overflow-x: hidden;
         }
-        .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        /* 导航链接样式 - 匹配图片下划线激活效果 */
+
+        /* 导航链接下划线效果 */
         .nav-link {
             position: relative;
             color: #1E1B4B !important;
             font-weight: 500;
+            text-decoration: none;
         }
         .nav-link::after {
             content: '';
@@ -115,14 +95,17 @@
             background-color: #F472B6;
             transition: width 0.3s ease;
         }
-        .nav-link.active::after,
-        .nav-link:hover::after {
-            width: 100%;
+        .nav-link.active::after, .nav-link:hover::after { width: 100%; }
+
+        /* 产品卡片悬浮效果 */
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
         }
-        /* 语言下拉菜单样式 - 匹配图片 */
-        .lang-dropdown {
-            position: relative;
-        }
+
+        /* 语言下拉菜单（核心修复：删除无效9h单位，统一尺寸） */
+        .lang-dropdown { position: relative; }
         .lang-dropdown-content {
             display: none;
             position: absolute;
@@ -131,78 +114,99 @@
             background-color: white;
             min-width: 120px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            z-index: 100;
+            z-index: 999; /* 提升层级，避免被遮挡 */
             border-radius: 6px;
             overflow: hidden;
         }
-        .lang-dropdown:hover .lang-dropdown-content {
-            display: block;
-        }
+        .lang-dropdown-content.show { display: block; }
         .lang-option {
             padding: 8px 16px;
             cursor: pointer;
             transition: background-color 0.2s;
         }
-        .lang-option:hover {
-            background-color: #f3f4f6;
+        .lang-option:hover { background-color: #f3f4f6; }
+
+        /* 移动端菜单样式（重构，避免布局错乱） */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: white;
+            z-index: 998;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            padding: 2rem;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+        }
+        .mobile-menu.open { transform: translateX(0); }
+        .mobile-menu-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #1E1B4B;
+        }
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 997;
+            display: none;
+        }
+        .mobile-overlay.show { display: block; }
+
+        /* 移动端按钮统一样式（修复重叠核心） */
+        .mobile-lang-btn, .mobile-menu-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1E1B4B;
         }
     </style>
 </head>
-<body class="bg-light-DEFAULT text-dark-DEFAULT">
-    <!-- 导航栏 - 完全匹配图片样式 -->
+<body>
+    <!-- 导航栏（重构，避免重复元素） -->
     <nav class="fixed top-0 left-0 w-full bg-white shadow-sm z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
-                <!-- Logo - 修复多语言切换问题 -->
-                <a href="index.html" class="flex items-center">
-                    <span class="text-2xl font-bold">
+                <!-- Logo（固定宽度，防止被挤压） -->
+                <a href="index.html" class="flex items-center min-w-[150px]">
+                    <span class="text-2xl font-bold whitespace-nowrap">
                         <span class="text-primary">HF</span>
-                        <span class="logo-gradient"
-                              data-lang-zh="电子科技"
-                              data-lang-en="Electronic Technology"
-                              data-lang-ar="التكنولوجيا الإلكترونية">电子科技</span>
+                        <span class="logo-gradient" data-lang-zh="电子科技" data-lang-en="Electronic Technology" data-lang-ar="التكنولوجيا الإلكترونية">电子科技</span>
                     </span>
                 </a>
                 
-                <!-- 桌面端导航 - 完全匹配图片菜单项和顺序 -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="nav-link"
-                       data-lang-zh="首页"
-                       data-lang-en="Home"
-                       data-lang-ar="الرئيسية">首页</a>
-                    <a href="index.html#products" class="nav-link"
-                       data-lang-zh="产品服务"
-                       data-lang-en="Products & Services"
-                       data-lang-ar="المنتجات والخدمات">产品服务</a>
-                    <a href="battery-cables.html" class="nav-link active"
-                       data-lang-zh="排线型号列表"
-                       data-lang-en="Cable Model List"
-                       data-lang-ar="قائمة أنماط الكابلات">排线型号列表</a>
-                    <a href="tutorials.html" class="nav-link"
-                       data-lang-zh="教程中心"
-                       data-lang-en="Tutorial Center"
-                       data-lang-ar="مركز الدروس التعليمية">教程中心</a>
-                    <a href="index.html#download" class="nav-link"
-                       data-lang-zh="应用下载"
-                       data-lang-en="App Download"
-                       data-lang-ar="تنزيل التطبيق">应用下载</a>
-                    <a href="index.html#about" class="nav-link"
-                       data-lang-zh="关于我们"
-                       data-lang-en="About Us"
-                       data-lang-ar="من نحن">关于我们</a>
-                    <a href="index.html#contact" class="nav-link"
-                       data-lang-zh="联系我们"
-                       data-lang-en="Contact Us"
-                       data-lang-ar="اتصل بنا">联系我们</a>
+                <!-- 桌面端导航（隐藏重复语言菜单） -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="nav-link" data-lang-zh="首页" data-lang-en="Home" data-lang-ar="الرئيسية">首页</a>
+                    <a href="index.html#products" class="nav-link" data-lang-zh="产品服务" data-lang-en="Products & Services" data-lang-ar="المنتجات والخدمات">产品服务</a>
+                    <a href="battery-cables.html" class="nav-link active" data-lang-zh="排线型号列表" data-lang-en="Cable Model List" data-lang-ar="قائمة أنماط الكابلات">排线型号列表</a>
+                    <a href="tutorials.html" class="nav-link" data-lang-zh="教程中心" data-lang-en="Tutorial Center" data-lang-ar="مركز الدروس التعليمية">教程中心</a>
+                    <a href="index.html#download" class="nav-link" data-lang-zh="应用下载" data-lang-en="App Download" data-lang-ar="تنزيل التطبيق">应用下载</a>
+                    <a href="index.html#about" class="nav-link" data-lang-zh="关于我们" data-lang-en="About Us" data-lang-ar="من نحن">关于我们</a>
+                    <a href="index.html#contact" class="nav-link" data-lang-zh="联系我们" data-lang-en="Contact Us" data-lang-ar="اتصل بنا">联系我们</a>
                     
-                    <!-- 语言切换 - 图片样式的下拉菜单 -->
-                    <div class="lang-dropdown ml-4">
+                    <!-- 桌面端语言切换（唯一） -->
+                    <div class="lang-dropdown ml-2">
                         <button class="flex items-center gap-1 text-dark font-medium">
                             <i class="fas fa-globe text-primary"></i>
-                            <span id="current-lang-text"
-                                  data-lang-zh="中文"
-                                  data-lang-en="English"
-                                  data-lang-ar="العربية">中文</span>
+                            <span class="current-lang" data-lang-zh="中文" data-lang-en="English" data-lang-ar="العربية">中文</span>
                             <i class="fas fa-chevron-down text-xs"></i>
                         </button>
                         <div class="lang-dropdown-content">
@@ -213,309 +217,236 @@
                     </div>
                 </div>
                 
-                <!-- 移动端菜单按钮 -->
-                <div class="md:hidden flex items-center">
-                    <button class="text-dark text-xl">
-                        <i class="fas fa-bars"></i>
+                <!-- 移动端按钮组（唯一，修复重叠） -->
+                <div class="md:hidden flex items-center gap-2">
+                    <!-- 移动端语言切换（唯一） -->
+                    <div class="lang-dropdown">
+                        <button class="mobile-lang-btn">
+                            <i class="fas fa-globe text-primary"></i>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <div class="lang-option" data-lang="zh">中文</div>
+                            <div class="lang-option" data-lang="en">English</div>
+                            <div class="lang-option" data-lang="ar">العربية</div>
+                        </div>
+                    </div>
+                    <!-- 移动端菜单按钮 -->
+                    <button id="mobile-menu-btn" class="mobile-menu-btn">
+                        <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- 产品列表页面内容 -->
-    <section class="py-20 bg-subtle-pattern pt-28">
+    <!-- 移动端菜单（独立，无重复） -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-close" id="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <!-- 移动端语言切换（内部唯一） -->
+        <div class="lang-dropdown mb-4">
+            <button class="flex items-center gap-1 text-dark font-medium">
+                <i class="fas fa-globe text-primary"></i>
+                <span class="current-lang" data-lang-zh="中文" data-lang-en="English" data-lang-ar="العربية">中文</span>
+                <i class="fas fa-chevron-down text-xs"></i>
+            </button>
+            <div class="lang-dropdown-content">
+                <div class="lang-option" data-lang="zh">中文</div>
+                <div class="lang-option" data-lang="en">English</div>
+                <div class="lang-option" data-lang="ar">العربية</div>
+            </div>
+        </div>
+        <!-- 移动端导航链接 -->
+        <div class="mobile-nav-links">
+            <a href="index.html" class="nav-link" data-lang-zh="首页" data-lang-en="Home" data-lang-ar="الرئيسية">首页</a>
+            <a href="index.html#products" class="nav-link" data-lang-zh="产品服务" data-lang-en="Products & Services" data-lang-ar="المنتجات والخدمات">产品服务</a>
+            <a href="battery-cables.html" class="nav-link active" data-lang-zh="排线型号列表" data-lang-en="Cable Model List" data-lang-ar="قائمة أنماط الكابلات">排线型号列表</a>
+            <a href="tutorials.html" class="nav-link" data-lang-zh="教程中心" data-lang-en="Tutorial Center" data-lang-ar="مركز الدروس التعليمية">教程中心</a>
+            <a href="index.html#download" class="nav-link" data-lang-zh="应用下载" data-lang-en="App Download" data-lang-ar="تنزيل التطبيق">应用下载</a>
+            <a href="index.html#about" class="nav-link" data-lang-zh="关于我们" data-lang-en="About Us" data-lang-ar="من نحن">关于我们</a>
+            <a href="index.html#contact" class="nav-link" data-lang-zh="联系我们" data-lang-en="Contact Us" data-lang-ar="اتصل بنا">联系我们</a>
+        </div>
+    </div>
+
+    <!-- 产品列表核心内容 -->
+    <section class="py-12 bg-subtle-pattern">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10">
                 <h1 class="text-3xl md:text-4xl font-bold mb-4">
-                    <span class="gradient-text"
-                          data-lang-zh="电池修复排线型号列表"
-                          data-lang-en="Battery Repair Flex Cable Model List"
-                          data-lang-ar="قائمة أنماط كابلات إصلاح البطارية">
+                    <span class="gradient-text" data-lang-zh="电池修复排线型号列表" data-lang-en="Battery Repair Flex Cable Model List" data-lang-ar="قائمة أنماط كابلات إصلاح البطارية">
                         电池修复排线型号列表
                     </span>
                 </h1>
-                <p class="text-gray-600 max-w-2xl mx-auto"
-                   data-lang-zh="HF苹果全系列电池修复排线，精准修复电池健康度，可搭配HF多功能编程修复仪使用"
-                   data-lang-en="HF full range of Apple battery repair flex cables, accurately repair battery health, can be used with HF multi-functional programming repair instrument"
-                   data-lang-ar="سلسلة كاملة من كابلات إصلاح بطاريات آبل HF، إصلاح دقيق لصحة البطارية، يمكن استخدامها مع جهاز إصلاح البرمجة متعدد الوظائف HF">
+                <p class="text-gray-600 max-w-2xl mx-auto" data-lang-zh="HF苹果全系列电池修复排线，精准修复电池健康度，可搭配HF多功能编程修复仪使用" data-lang-en="HF full range of Apple battery repair flex cables, accurately repair battery health, can be used with HF multi-functional programming repair instrument" data-lang-ar="سلسلة كاملة من كابلات إصلاح بطاريات آبل HF، إصلاح دقيق لصحة البطارية، يمكن استخدامها مع جهاز إصلاح البرمجة متعدد الوظائف HF">
                     HF苹果全系列电池修复排线，精准修复电池健康度，可搭配HF多功能编程修复仪使用
                 </p>
             </div>
             
-            <!-- 产品分类标签 - 保留原有交互 -->
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button class="category-btn bg-primary text-white px-4 py-2 rounded-full font-medium" data-series="all"
-                        data-lang-zh="全部型号"
-                        data-lang-en="All Models"
-                        data-lang-ar="جميع الأنماط">全部型号</button>
-                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium transition-all duration-300" data-series="11"
-                        data-lang-zh="iPhone 11系列"
-                        data-lang-en="iPhone 11 Series"
-                        data-lang-ar="سلسلة آيفون 11">iPhone 11系列</button>
-                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium transition-all duration-300" data-series="12"
-                        data-lang-zh="iPhone 12系列"
-                        data-lang-en="iPhone 12 Series"
-                        data-lang-ar="سلسلة آيفون 12">iPhone 12系列</button>
-                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium transition-all duration-300" data-series="13"
-                        data-lang-zh="iPhone 13系列"
-                        data-lang-en="iPhone 13 Series"
-                        data-lang-ar="سلسلة آيفون 13">iPhone 13系列</button>
-                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium transition-all duration-300" data-series="14"
-                        data-lang-zh="iPhone 14系列"
-                        data-lang-en="iPhone 14 Series"
-                        data-lang-ar="سلسلة آيفون 14">iPhone 14系列</button>
-                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium transition-all duration-300" data-series="15"
-                        data-lang-zh="iPhone 15系列"
-                        data-lang-en="iPhone 15 Series"
-                        data-lang-ar="سلسلة آيفون 15">iPhone 15系列</button>
+            <!-- 分类标签（适配小屏，防止溢出） -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <button class="category-btn bg-primary text-white px-4 py-2 rounded-full font-medium text-sm" data-series="all" data-lang-zh="全部型号" data-lang-en="All Models" data-lang-ar="جميع الأنماط">全部型号</button>
+                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium text-sm transition-all" data-series="11" data-lang-zh="iPhone 11系列" data-lang-en="iPhone 11 Series" data-lang-ar="سلسلة آيفون 11">iPhone 11系列</button>
+                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium text-sm transition-all" data-series="12" data-lang-zh="iPhone 12系列" data-lang-en="iPhone 12 Series" data-lang-ar="سلسلة آيفون 12">iPhone 12系列</button>
+                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium text-sm transition-all" data-series="13" data-lang-zh="iPhone 13系列" data-lang-en="iPhone 13 Series" data-lang-ar="سلسلة آيفون 13">iPhone 13系列</button>
+                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium text-sm transition-all" data-series="14" data-lang-zh="iPhone 14系列" data-lang-en="iPhone 14 Series" data-lang-ar="سلسلة آيفون 14">iPhone 14系列</button>
+                <button class="category-btn bg-white hover:bg-gray-100 text-dark px-4 py-2 rounded-full font-medium text-sm transition-all" data-series="15" data-lang-zh="iPhone 15系列" data-lang-en="iPhone 15 Series" data-lang-ar="سلسلة آيفون 15">iPhone 15系列</button>
             </div>
             
-            <!-- 产品网格 - 保留原有内容 -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- 产品网格（适配所有屏幕，防止图片变形） -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- iPhone 11系列 -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="11">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/11.png" alt="iPhone 11 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/11.png" alt="iPhone 11 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 11 电池修复排线"
-                            data-lang-en="iPhone 11 Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 11">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 11 电池修复排线" data-lang-en="iPhone 11 Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 11">
                             iPhone 11 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 11机型，精准修复电池健康度"
-                           data-lang-en="Suitable for iPhone 11 models, accurately repair battery health"
-                           data-lang-ar="مناسب لطرازات آيفون 11، إصلاح دقيق لصحة البطارية">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 11机型，精准修复电池健康度" data-lang-en="Suitable for iPhone 11 models, accurately repair battery health" data-lang-ar="مناسب لطرازات آيفون 11، إصلاح دقيق لصحة البطارية">
                             适用于iPhone 11机型，精准修复电池健康度
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
                 
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="11">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/11pro.png" alt="iPhone 11 Pro/Pro Max 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/11pro.png" alt="iPhone 11 Pro/Pro Max 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 11 Pro/Pro Max 电池修复排线"
-                            data-lang-en="iPhone 11 Pro/Pro Max Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 11 برو/برو ماكس">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 11 Pro/Pro Max 电池修复排线" data-lang-en="iPhone 11 Pro/Pro Max Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 11 برو/برو ماكس">
                             iPhone 11 Pro/Pro Max 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 11 Pro/Pro Max机型"
-                           data-lang-en="Suitable for iPhone 11 Pro/Pro Max models"
-                           data-lang-ar="مناسب لطرازات آيفون 11 برو/برو ماكس">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 11 Pro/Pro Max机型" data-lang-en="Suitable for iPhone 11 Pro/Pro Max models" data-lang-ar="مناسب لطرازات آيفون 11 برو/برو ماكس">
                             适用于iPhone 11 Pro/Pro Max机型
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
                 
                 <!-- iPhone 12系列 -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="12">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/12.png" alt="iPhone 12/12 mini 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/12.png" alt="iPhone 12/12 mini 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 12/12 mini 电池修复排线"
-                            data-lang-en="iPhone 12/12 mini Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 12/12 ميني">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 12/12 mini 电池修复排线" data-lang-en="iPhone 12/12 mini Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 12/12 ميني">
                             iPhone 12/12 mini 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 12/12 mini机型"
-                           data-lang-en="Suitable for iPhone 12/12 mini models"
-                           data-lang-ar="مناسب لطرازات آيفون 12/12 ميني">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 12/12 mini机型" data-lang-en="Suitable for iPhone 12/12 mini models" data-lang-ar="مناسب لطرازات آيفون 12/12 ميني">
                             适用于iPhone 12/12 mini机型
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
                 
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="12">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/12pro.png" alt="iPhone 12 Pro/Pro Max 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/12pro.png" alt="iPhone 12 Pro/Pro Max 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 12 Pro/Pro Max 电池修复排线"
-                            data-lang-en="iPhone 12 Pro/Pro Max Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 12 برو/برو ماكس">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 12 Pro/Pro Max 电池修复排线" data-lang-en="iPhone 12 Pro/Pro Max Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 12 برو/برو ماكس">
                             iPhone 12 Pro/Pro Max 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 12 Pro/Pro Max机型"
-                           data-lang-en="Suitable for iPhone 12 Pro/Pro Max models"
-                           data-lang-ar="مناسب لطرازات آيفون 12 برو/برو ماكس">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 12 Pro/Pro Max机型" data-lang-en="Suitable for iPhone 12 Pro/Pro Max models" data-lang-ar="مناسب لطرازات آيفون 12 برو/برو ماكس">
                             适用于iPhone 12 Pro/Pro Max机型
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
                 
                 <!-- iPhone 13系列 -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="13">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/13mini.png" alt="iPhone 13/13 mini 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/13mini.png" alt="iPhone 13/13 mini 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 13/13 mini 电池修复排线"
-                            data-lang-en="iPhone 13/13 mini Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 13/13 ميني">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 13/13 mini 电池修复排线" data-lang-en="iPhone 13/13 mini Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 13/13 ميني">
                             iPhone 13/13 mini 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 13/13 mini机型"
-                           data-lang-en="Suitable for iPhone 13/13 mini models"
-                           data-lang-ar="مناسب لطرازات آيفون 13/13 ميني">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 13/13 mini机型" data-lang-en="Suitable for iPhone 13/13 mini models" data-lang-ar="مناسب لطرازات آيفون 13/13 ميني">
                             适用于iPhone 13/13 mini机型
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
                 
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="13">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/13pro.png" alt="iPhone 13 Pro/Pro Max 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/13pro.png" alt="iPhone 13 Pro/Pro Max 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 13 Pro/Pro Max 电池修复排线"
-                            data-lang-en="iPhone 13 Pro/Pro Max Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 13 برو/برو ماكس">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 13 Pro/Pro Max 电池修复排线" data-lang-en="iPhone 13 Pro/Pro Max Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 13 برو/برو ماكس">
                             iPhone 13 Pro/Pro Max 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 13 Pro/Pro Max机型"
-                           data-lang-en="Suitable for iPhone 13 Pro/Pro Max models"
-                           data-lang-ar="مناسب لطرازات آيفون 13 برو/برو ماكس">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 13 Pro/Pro Max机型" data-lang-en="Suitable for iPhone 13 Pro/Pro Max models" data-lang-ar="مناسب لطرازات آيفون 13 برو/برو ماكس">
                             适用于iPhone 13 Pro/Pro Max机型
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
                 
                 <!-- iPhone 14系列 -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="14">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/14plus.png" alt="iPhone 14/14 Plus 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/14plus.png" alt="iPhone 14/14 Plus 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 14/14 Plus 电池修复排线"
-                            data-lang-en="iPhone 14/14 Plus Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 14/14 بلس">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 14/14 Plus 电池修复排线" data-lang-en="iPhone 14/14 Plus Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 14/14 بلس">
                             iPhone 14/14 Plus 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 14/14 Plus机型"
-                           data-lang-en="Suitable for iPhone 14/14 Plus models"
-                           data-lang-ar="مناسب لطرازات آيفون 14/14 بلس">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 14/14 Plus机型" data-lang-en="Suitable for iPhone 14/14 Plus models" data-lang-ar="مناسب لطرازات آيفون 14/14 بلس">
                             适用于iPhone 14/14 Plus机型
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
                 
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="14">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/14pro.png" alt="iPhone 14 Pro/Pro Max 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/14pro.png" alt="iPhone 14 Pro/Pro Max 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 14 Pro/Pro Max 电池修复排线"
-                            data-lang-en="iPhone 14 Pro/Pro Max Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 14 برو/برو ماكس">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 14 Pro/Pro Max 电池修复排线" data-lang-en="iPhone 14 Pro/Pro Max Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 14 برو/برو ماكس">
                             iPhone 14 Pro/Pro Max 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 14 Pro/Pro Max机型"
-                           data-lang-en="Suitable for iPhone 14 Pro/Pro Max models"
-                           data-lang-ar="مناسب لطرازات آيفون 14 برو/برو ماكس">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 14 Pro/Pro Max机型" data-lang-en="Suitable for iPhone 14 Pro/Pro Max models" data-lang-ar="مناسب لطرازات آيفون 14 برو/برو ماكس">
                             适用于iPhone 14 Pro/Pro Max机型
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
                 
                 <!-- iPhone 15系列 -->
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="15">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/15pro.png" alt="iPhone 15/15 Plus 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/15pro.png" alt="iPhone 15/15 Plus 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 15/15 Plus 电池修复排线"
-                            data-lang-en="iPhone 15/15 Plus Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 15/15 بلس">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 15/15 Plus 电池修复排线" data-lang-en="iPhone 15/15 Plus Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 15/15 بلس">
                             iPhone 15/15 Plus 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 15/15 Plus机型"
-                           data-lang-en="Suitable for iPhone 15/15 Plus models"
-                           data-lang-ar="مناسب لطرازات آيفون 15/15 بلس">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 15/15 Plus机型" data-lang-en="Suitable for iPhone 15/15 Plus models" data-lang-ar="مناسب لطرازات آيفون 15/15 بلس">
                             适用于iPhone 15/15 Plus机型
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
                 
                 <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover" data-series="15">
-                    <div class="h-48 bg-gray-100 flex items-center justify-center">
-                        <img src="images/15promax.png" alt="iPhone 15 Pro/Pro Max 电池修复排线" class="max-h-full object-contain p-4">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center p-4">
+                        <img src="images/15promax.png" alt="iPhone 15 Pro/Pro Max 电池修复排线" class="max-h-full object-contain">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-lg font-bold mb-2"
-                            data-lang-zh="iPhone 15 Pro/Pro Max 电池修复排线"
-                            data-lang-en="iPhone 15 Pro/Pro Max Battery Repair Flex Cable"
-                            data-lang-ar="كابل إصلاح بطارية آيفون 15 برو/برو ماكس">
+                        <h3 class="text-lg font-bold mb-2" data-lang-zh="iPhone 15 Pro/Pro Max 电池修复排线" data-lang-en="iPhone 15 Pro/Pro Max Battery Repair Flex Cable" data-lang-ar="كابل إصلاح بطارية آيفون 15 برو/برو ماكس">
                             iPhone 15 Pro/Pro Max 电池修复排线
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4"
-                           data-lang-zh="适用于iPhone 15 Pro/Pro Max机型"
-                           data-lang-en="Suitable for iPhone 15 Pro/Pro Max models"
-                           data-lang-ar="مناسب لطرازات آيفون 15 برو/برو ماكس">
+                        <p class="text-gray-600 text-sm mb-4" data-lang-zh="适用于iPhone 15 Pro/Pro Max机型" data-lang-en="Suitable for iPhone 15 Pro/Pro Max models" data-lang-ar="مناسب لطرازات آيفون 15 برو/برو ماكس">
                             适用于iPhone 15 Pro/Pro Max机型
                         </p>
-                        <div class="text-center">
-                            <span class="text-primary font-bold text-lg"> </span>
-                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- 返回按钮 -->
-            <div class="mt-16 text-center">
-                <a href="index.html#products" class="inline-block bg-white hover:bg-gray-100 text-dark font-medium py-3 px-8 rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
+            <div class="mt-12 text-center">
+                <a href="index.html#products" class="inline-block bg-white hover:bg-gray-100 text-dark font-medium py-3 px-8 rounded-full transition-all shadow-md hover:shadow-lg">
                     <i class="fas fa-arrow-left mr-2"></i>
-                    <span data-lang-zh="返回产品中心"
-                          data-lang-en="Back to Product Center"
-                          data-lang-ar="العودة إلى مركز المنتجات">
+                    <span data-lang-zh="返回产品中心" data-lang-en="Back to Product Center" data-lang-ar="العودة إلى مركز المنتجات">
                         返回产品中心
                     </span>
                 </a>
@@ -523,187 +454,173 @@
         </div>
     </section>
 
-<!-- 页脚 - 添加三个二维码并适配多语言 -->
-<footer class="bg-dark text-white py-12">
-    <div class="container mx-auto px-4">
-        <div class="grid md:grid-cols-3 gap-8">
-            <div>
-                <h3 class="text-xl font-bold mb-4"
-                    data-lang-zh="HF<span class='logo-gradient'>电子科技</span>"
-                    data-lang-en="HF<span class='logo-gradient'>Electronic Technology</span>"
-                    data-lang-ar="HF<span class='logo-gradient'>التكنولوجيا الإلكترونية</span>">
-                    HF<span class="logo-gradient">电子科技</span>
-                </h3>
-                <p class="text-gray-400 mb-4"
-                   data-lang-zh="引领科技创新，驱动未来发展。为企业提供前沿的技术解决方案。"
-                   data-lang-en="Leading technological innovation, driving future development. Providing cutting-edge technical solutions for enterprises."
-                   data-lang-ar="قيادة الابتكار التكنولوجي، دفع عجلة التنمية المستقبلية. تقديم حلول تقنية متقدمة للشركات.">
-                    引领科技创新，驱动未来发展。为企业提供前沿的技术解决方案。
-                </p>
-                <!-- 社交图标 -->
-                <div class="flex space-x-4 mt-4">
-                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                        <i class="fab fa-weixin text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                        <i class="fab fa-weibo text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                        <i class="fab fa-linkedin-in text-xl"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors">
-                        <i class="fab fa-twitter text-xl"></i>
-                    </a>
+    <!-- 页脚（重构，无重复） -->
+    <footer class="bg-dark text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">
+                        <span class="text-primary">HF</span>
+                        <span class="logo-gradient" data-lang-zh="电子科技" data-lang-en="Electronic Technology" data-lang-ar="التكنولوجيا الإلكترونية">电子科技</span>
+                    </h3>
+                    <p class="text-gray-400 mb-4 text-sm" data-lang-zh="引领科技创新，驱动未来发展。为企业提供前沿的技术解决方案。" data-lang-en="Leading technological innovation, driving future development. Providing cutting-edge technical solutions for enterprises." data-lang-ar="قيادة الابتكار التكنولوجي، دفع عجلة التنمية المستقبلية. تقديم حلول تقنية متقدمة للشركات.">
+                        引领科技创新，驱动未来发展。为企业提供前沿的技术解决方案。
+                    </p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-weixin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-weibo text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-linkedin-in text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <h3 class="text-lg font-bold mb-4"
-                    data-lang-zh="联系我们"
-                    data-lang-en="Contact Us"
-                    data-lang-ar="اتصل بنا">
-                    联系我们
-                </h3>
-                <ul class="space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-map-marker-alt mr-2 text-secondary"></i>
-                        <span class="text-gray-400"
-                              data-lang-zh="广东深圳, 中港通讯城"
-                              data-lang-en="Shenzhen, Guangdong, China Hong Kong Telecom City"
-                              data-lang-ar="شنتشن، قوانغدونغ، مدينة الاتصالات هونغ كونغ الصينية">
-                            广东深圳, 中港通讯城
-                        </span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-phone-alt mr-2 text-secondary"></i>
-                        <span class="text-gray-400">+86 13530936636</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-envelope mr-2 text-secondary"></i>
-                        <span class="text-gray-400">QILINI1267@163.com</span>
-                    </li>
-                </ul>
-            </div>
-            <!-- 新增三个二维码区域 -->
-            <div>
-                <h3 class="text-lg font-bold mb-4"
-                    data-lang-zh="扫码联系"
-                    data-lang-en="Scan to Contact"
-                    data-lang-ar="مسح للاتصال">
-                    扫码联系
-                </h3>
-                <div class="qrcode-container">
-                    <!-- 二维码1：微信 -->
-                    <div class="qrcode-item">
-                        <img src="images/wechat-qrcode.jpg" alt="微信二维码" class="qrcode-img">
-                        <p class="qrcode-text"
-                           data-lang-zh="微信客服"
-                           data-lang-en="WeChat Service"
-                           data-lang-ar="خدمة وي تشات">
-                            微信客服
-                        </p>
-                    </div>
-                    <!-- 二维码2：公众号/其他 -->
-                    <div class="qrcode-item">
-                        <img src="images/official-qrcode.jpg" alt="公众号二维码" class="qrcode-img">
-                        <p class="qrcode-text"
-                           data-lang-zh="官方公众号"
-                           data-lang-en="Official Account"
-                           data-lang-ar="الحساب الرسمي">
-                            官方公众号
-                        </p>
-                    </div>
-                    <!-- 二维码3：预留自定义 -->
-                    <div class="qrcode-item">
-                        <img src="images/custom-qrcode.jpg" alt="自定义二维码" class="qrcode-img">
-                        <p class="qrcode-text">Whats</p>
+                <div>
+                    <h3 class="text-lg font-bold mb-4" data-lang-zh="联系我们" data-lang-en="Contact Us" data-lang-ar="اتصل بنا">联系我们</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-secondary"></i>
+                            <span class="text-gray-400" data-lang-zh="广东深圳, 中港通讯城" data-lang-en="Shenzhen, Guangdong, China Hong Kong Telecom City" data-lang-ar="شنتشن، قوانغدونغ، مدينة الاتصالات هونغ كونغ الصينية">广东深圳, 中港通讯城</span>
+                        </li>
+                        <li class="flex items-center"><i class="fas fa-phone-alt mr-2 text-secondary"></i><span class="text-gray-400">+86 13530936636</span></li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2 text-secondary"></i><span class="text-gray-400">QILINI1267@163.com</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold mb-4" data-lang-zh="扫码联系" data-lang-en="Scan to Contact" data-lang-ar="مسح للاتصال">扫码联系</h3>
+                    <div class="qrcode-container">
+                        <div class="qrcode-item">
+                            <img src="images/wechat-qrcode.jpg" alt="微信二维码" class="qrcode-img">
+                            <p class="qrcode-text" data-lang-zh="微信客服" data-lang-en="WeChat Service" data-lang-ar="خدمة وي تشات">微信客服</p>
+                        </div>
+                        <div class="qrcode-item">
+                            <img src="images/official-qrcode.jpg" alt="公众号二维码" class="qrcode-img">
+                            <p class="qrcode-text" data-lang-zh="官方公众号" data-lang-en="Official Account" data-lang-ar="الحساب الرسمي">官方公众号</p>
+                        </div>
+                        <div class="qrcode-item">
+                            <img src="images/custom-qrcode.jpg" alt="自定义二维码" class="qrcode-img">
+                            <p class="qrcode-text">Whats</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400 text-xs" data-lang-zh="&copy; 2023 HF电子科技. 保留所有权利。" data-lang-en="&copy; 2023 HF Electronic Technology. All rights reserved." data-lang-ar="&copy; 2023 HF للتكنولوجيا الإلكترونية. جميع الحقوق محفوظة.">
+                &copy; 2023 HF电子科技. 保留所有权利。
+            </div>
         </div>
-        <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm"
-             data-lang-zh="&copy; 2023 HF电子科技. 保留所有权利。"
-             data-lang-en="&copy; 2023 HF Electronic Technology. All rights reserved."
-             data-lang-ar="&copy; 2023 HF للتكنولوجيا الإلكترونية. جميع الحقوق محفوظة.">
-            &copy; 2023 HF电子科技. 保留所有权利。
-        </div>
-    </div>
-</footer>
+    </footer>
 
+    <!-- 核心JS（重构，删除重复逻辑，修复ID冲突） -->
     <script>
-        // ========== 多语言切换核心功能（修复Logo切换问题） ==========
+        // ========== 全局变量（统一语言切换） ==========
         const langOptions = document.querySelectorAll('.lang-option');
-        const currentLangText = document.getElementById('current-lang-text');
+        const currentLangElements = document.querySelectorAll('.current-lang');
         const translatableElements = document.querySelectorAll('[data-lang-zh]');
         const htmlElement = document.documentElement;
-        
-        // 设置语言函数
+        let currentLang = localStorage.getItem('preferredLang') || 'zh';
+
+        // ========== 多语言切换核心 ==========
         function setLanguage(lang) {
-            // 更新所有可翻译元素的文本（包括Logo）
+            currentLang = lang;
+            // 更新所有可翻译文本
             translatableElements.forEach(el => {
-                if (el.hasAttribute('data-lang-' + lang)) {
-                    el.innerHTML = el.getAttribute('data-lang-' + lang);
-                }
+                el.innerHTML = el.getAttribute(`data-lang-${lang}`) || el.getAttribute('data-lang-zh');
             });
-            
-            // 更新HTML属性适配RTL（阿拉伯语）
+            // 适配阿拉伯语RTL布局
             htmlElement.setAttribute('lang', lang === 'ar' ? 'ar-SA' : lang === 'en' ? 'en-US' : 'zh-CN');
             htmlElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-            
-            // 保存语言偏好到本地存储
+            // 保存到本地存储
             localStorage.setItem('preferredLang', lang);
+            // 关闭所有语言下拉菜单
+            closeAllLangDropdowns();
         }
-        
-        // 为语言选项添加点击事件
+
+        // 初始化语言
+        setLanguage(currentLang);
+
+        // 语言选项点击事件
         langOptions.forEach(option => {
             option.addEventListener('click', () => {
-                const lang = option.getAttribute('data-lang');
-                setLanguage(lang);
+                setLanguage(option.dataset.lang);
             });
         });
-        
-        // 初始化语言（优先使用本地存储，否则默认中文）
-        const savedLang = localStorage.getItem('preferredLang') || 'zh';
-        setLanguage(savedLang);
 
-        // ========== 分类筛选功能 ==========
+        // ========== 语言下拉菜单控制（核心修复重复显示） ==========
+        function closeAllLangDropdowns() {
+            document.querySelectorAll('.lang-dropdown-content').forEach(menu => {
+                menu.classList.remove('show');
+            });
+        }
+
+        document.querySelectorAll('.lang-dropdown').forEach(dropdown => {
+            const btn = dropdown.querySelector('button');
+            const menu = dropdown.querySelector('.lang-dropdown-content');
+
+            // 点击按钮切换菜单
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeAllLangDropdowns();
+                menu.classList.toggle('show');
+            });
+
+            // 鼠标移入保持显示，移出关闭
+            menu.addEventListener('mouseenter', () => menu.classList.add('show'));
+            menu.addEventListener('mouseleave', () => menu.classList.remove('show'));
+        });
+
+        // 点击页面空白处关闭所有菜单
+        document.addEventListener('click', closeAllLangDropdowns);
+
+        // ========== 产品分类筛选 ==========
         const categoryBtns = document.querySelectorAll('.category-btn');
         const productCards = document.querySelectorAll('.card-hover');
 
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                const selectedSeries = btn.getAttribute('data-series');
-                
+                const series = btn.dataset.series;
                 // 切换按钮样式
                 categoryBtns.forEach(b => {
                     b.classList.remove('bg-primary', 'text-white');
                     b.classList.add('bg-white', 'text-dark', 'hover:bg-gray-100');
                 });
-                btn.classList.remove('bg-white', 'text-dark', 'hover:bg-gray-100');
                 btn.classList.add('bg-primary', 'text-white');
-                
+                btn.classList.remove('bg-white', 'text-dark', 'hover:bg-gray-100');
                 // 筛选产品
                 productCards.forEach(card => {
-                    const cardSeries = card.getAttribute('data-series');
-                    if (selectedSeries === 'all' || cardSeries === selectedSeries) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    card.style.display = (series === 'all' || card.dataset.series === series) ? 'block' : 'none';
                 });
             });
         });
 
+        // ========== 移动端菜单控制 ==========
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-links a');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('open');
+            mobileOverlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+            closeAllLangDropdowns(); // 同时关闭语言菜单
+        }
+
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+        mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+
         // ========== 导航激活状态（当前页高亮） ==========
         document.addEventListener('DOMContentLoaded', () => {
             const currentPath = window.location.pathname;
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            navLinks.forEach(link => {
-                // 移除所有激活状态
+            document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
-                // 匹配当前页面
-                if (link.getAttribute('href') === currentPath || 
-                    (currentPath.includes('battery-cables.html') && link.getAttribute('href') === 'battery-cables.html')) {
+                if (link.getAttribute('href') === currentPath || (currentPath.includes('battery-cables.html') && link.getAttribute('href') === 'battery-cables.html')) {
                     link.classList.add('active');
                 }
             });
