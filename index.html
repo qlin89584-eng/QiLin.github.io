@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HF电子科技 - 引领科技创新</title>
+    
+    <!-- 预加载关键资源 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" as="style">
+    
+    <!-- 内联关键样式 -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+            visibility: visible !important;
+        }
+        body {
+            font-family: 'sans-serif', 'Poppins', 'Noto Naskh Arabic';
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            background-color: #F8FAFC;
+            color: #1E1B4B;
+        }
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 300 700;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJbecmNE.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+        @font-face {
+            font-family: 'Noto Naskh Arabic';
+            font-style: normal;
+            font-weight: 400 700;
+            font-display: swap;
+            src: url(https://fonts.gstatic.com/s/notonaskharabic/v20/5aU66_a8oxmIdGl4BAABq79CaGi4WJg.woff2) format('woff2');
+            unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0898-08E1, U+08E2-08FF, U+200C-200E, U+2010-2011, U+04F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 50;
+            background: white;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        }
+        .fade-in {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+        [dir="rtl"] {
+            text-align: right;
+        }
+        [dir="rtl"] .nav-link::after {
+            left: auto;
+            right: 0;
+        }
+        [dir="rtl"] .flex {
+            direction: rtl;
+        }
+        [dir="rtl"] .space-x-8 > :not([hidden]) ~ :not([hidden]) {
+            --tw-space-x-reverse: 1;
+            margin-right: 0;
+            margin-left: 2rem;
+        }
+        [dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+            --tw-space-x-reverse: 1;
+            margin-right: 0;
+            margin-left: 1rem;
+        }
+        .lang-dropdown {
+            position: relative;
+        }
+        .lang-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 120px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            z-index: 100;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .lang-dropdown:hover .lang-dropdown-content {
+            display: block;
+        }
+        .lang-option {
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .lang-option:hover {
+            background-color: #f3f4f6;
+        }
+        [dir="rtl"] .lang-dropdown-content {
+            right: auto;
+            left: 0;
+        }
+    </style>
+    
+    <!-- 外部资源CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    
+    <!-- Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            DEFAULT: '#6C2BD9',
+                            dark: '#5A1BC7',
+                            light: '#8B5CF6'
+                        },
+                        secondary: {
+                            DEFAULT: '#F472B6',
+                            dark: '#EC4899',
+                            light: '#F9A8D4'
+                        },
+                        dark: {
+                            DEFAULT: '#1E1B4B',
+                            light: '#2E2B5A'
+                        },
+                        light: {
+                            DEFAULT: '#F8FAFC',
+                            dark: '#E2E8F0'
+                        }
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        arabic: ['Noto Naskh Arabic', 'serif']
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 2s infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- 自定义样式 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .gradient-text {
+                background: linear-gradient(90deg, #6C2BD9, #F472B6);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .hero-gradient {
+                background: linear-gradient(135deg, rgba(108, 43, 217, 0.95) 0%, rgba(30, 27, 75, 0.95) 100%);
+            }
+            .bg-subtle-pattern {
+                background-color: #F8FAFC;
+                background-image: radial-gradient(rgba(108, 43, 217, 0.05) 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+            .font-arabic {
+                font-family: 'Noto Naskh Arabic', serif;
+            }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #F472B6;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .download-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .download-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .download-btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-5px);
+            color: #F472B6;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="bg-light-DEFAULT text-dark-DEFAULT" data-lang="zh">
+    <!-- 导航栏 - 新增排线型号列表选项 -->
+    <nav class="fixed top-0 left-0 w-full bg-white/95 shadow-md z-50 backdrop-blur-sm transition-all duration-300">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#home" class="flex items-center">
+                    <span class="text-primary text-2xl font-bold" data-lang-key="brand_name">HF<span class="text-secondary">电子科技</span></span>
+                </a>
+                
+                <!-- 桌面导航 - 新增排线型号列表，教程中心改为跳转链接 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link active text-dark hover:text-primary font-medium" data-lang-key="nav_home">首页</a>
+                    <a href="#products" class="nav-link text-dark hover:text-primary font-medium" data-lang-key="nav_products">产品服务</a>
+                    <a href="battery-cables.html" class="nav-link text-dark hover:text-primary font-medium" data-lang-key="nav_cables">排线型号列表</a>
+                    <!-- 修改：教程中心从锚点链接改为跳转到独立页面 -->
+                    <a href="tutorials.html" class="nav-link text-dark hover:text-primary font-medium" data-lang-key="nav_tutorials">教程中心</a>
+                    <a href="#download" class="nav-link text-dark hover:text-primary font-medium" data-lang-key="nav_download">应用下载</a>
+                    <a href="#about" class="nav-link text-dark hover:text-primary font-medium" data-lang-key="nav_about">关于我们</a>
+                    <a href="#contact" class="nav-link text-dark hover:text-primary font-medium" data-lang-key="nav_contact">联系我们</a>
+                    <!-- 语言切换下拉菜单 -->
+                    <div class="lang-dropdown">
+                        <button class="flex items-center gap-2 text-dark hover:text-primary font-medium">
+                            <i class="fas fa-globe"></i>
+                            <span id="current-lang">中文</span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <div class="lang-option" data-lang="zh">中文</div>
+                            <div class="lang-option" data-lang="en">English</div>
+                            <div class="lang-option" data-lang="ar">العربية</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden flex items-center gap-4">
+                    <!-- 移动端语言切换 -->
+                    <div class="lang-dropdown">
+                        <button class="flex items-center gap-1 text-dark focus:outline-none">
+                            <i class="fas fa-globe"></i>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <div class="lang-option" data-lang="zh">中文</div>
+                            <div class="lang-option" data-lang="en">English</div>
+                            <div class="lang-option" data-lang="ar">العربية</div>
+                        </div>
+                    </div>
+                    <button id="menu-toggle" class="text-dark focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 移动端导航菜单 - 教程中心改为跳转链接 -->
+            <div id="mobile-menu" class="md:hidden hidden pt-4 pb-2 space-y-2">
+                <a href="#home" class="block py-2 font-medium text-dark hover:text-primary" data-lang-key="nav_home">首页</a>
+                <a href="#products" class="block py-2 font-medium text-dark hover:text-primary" data-lang-key="nav_products">产品服务</a>
+                <a href="battery-cables.html" class="block py-2 font-medium text-dark hover:text-primary" data-lang-key="nav_cables">排线型号列表</a>
+                <!-- 修改：移动端教程中心也改为跳转链接 -->
+                <a href="tutorials.html" class="block py-2 font-medium text-dark hover:text-primary" data-lang-key="nav_tutorials">教程中心</a>
+                <a href="#download" class="block py-2 font-medium text-dark hover:text-primary" data-lang-key="nav_download">应用下载</a>
+                <a href="#about" class="block py-2 font-medium text-dark hover:text-primary" data-lang-key="nav_about">关于我们</a>
+                <a href="#contact" class="block py-2 font-medium text-dark hover:text-primary" data-lang-key="nav_contact">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 移除：删除首页中的教程模块 -->
+
+    <!-- Hero区域 -->
+    <section id="home" class="relative min-h-screen flex items-center pt-16 bg-cover bg-center bg-fixed" 
+         style="background-image: url('images/关于我们背景.png'); 
+                background-color: #1E1B4B;">
+        <div class="absolute inset-0 hero-gradient bg-blend-multiply"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="text-white fade-in">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        <span data-lang-key="hero_title1">引领<span class="text-secondary">科技</span>创新</span><br>
+                        <span data-lang-key="hero_title2">驱动<span class="text-secondary">未来</span>发展</span>
+                    </h1>
+                    <p class="text-lg md:text-xl mb-8 text-gray-200 max-w-lg" data-lang-key="hero_desc">
+                        专注电池修复技术研发，为维修行业提供高效、可靠的解决方案，让技术创新赋能维修效率提升
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#products" class="bg-secondary hover:bg-secondary-dark text-white px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-lg hover:shadow-xl" data-lang-key="explore_products">
+                            探索产品
+                        </a>
+                        <a href="#contact" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-full font-medium hover:bg-white/10 transition-all duration-300" data-lang-key="contact_us">
+                            联系我们
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:block fade-in">
+                    <img src="images/logo.png" 
+                         alt="HF电子科技 产品" 
+                         class="w-full max-w-md mx-auto animate-float rounded-lg shadow-2xl"
+                         loading="lazy">
+                </div>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce-slow">
+                <a href="#about" class="flex flex-col items-center">
+                    <span data-lang-key="scroll_down">向下滚动</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心产品 -->
+    <section id="products" class="py-20 bg-subtle-pattern">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4"> <span class="gradient-text" data-lang-key="core_products">核心产品</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto" data-lang-key="core_products_desc"> 专注电池修复领域，打造高效、易用的维修工具和配件 </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div class="fade-in">
+                    <img src="images/产品图片1.jpg" alt="HF多功能编程修复仪" class="rounded-lg shadow-xl w-full" loading="lazy">
+                </div>
+                <div class="fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary text-white rounded-full p-2 mr-3">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold" data-lang-key="product1_name">HF多功能编程修复仪</h3>
+                    </div>
+                    <p class="text-gray-700 mb-6" data-lang-key="product1_desc">
+                        为多功能编程修复仪，专为电池排线维修场景打造，核心搭载电池快速修复黑科技，一键修复电池。
+                    </p>
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <h4 class="font-bold" data-lang-key="product1_feature1">电池快速修复</h4>
+                            <p class="text-gray-600" data-lang-key="product1_feature1_desc">高效修复流程，大幅缩短维修时间，专业维修效率翻倍</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold" data-lang-key="product1_feature2">多功能编程修复</h4>
+                            <p class="text-gray-600" data-lang-key="product1_feature2_desc">支持多种设备覆盖 8-15 全机型,你的全能助手</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold" data-lang-key="product1_feature3">便捷操作</h4>
+                            <p class="text-gray-600" data-lang-key="product1_feature3_desc">可视化操作逻辑，搭配清晰指引，无需复杂专业知识，一键启动修复。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1 fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-secondary text-white rounded-full p-2 mr-3">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold" data-lang-key="product2_name">电池修复排线</h3>
+                    </div>
+                    <p class="text-gray-700 mb-6" data-lang-key="product2_desc">
+                        HF 苹果全系列电池修复排线,精准修复电池健康度，可搭配 HF 多功能编程修复仪!
+                    </p>
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <h4 class="font-bold" data-lang-key="product2_feature1">适配无忧</h4>
+                            <p class="text-gray-600" data-lang-key="product2_feature1_desc">8-15 全机型覆盖,一套排线搞定所有苹果设备电池修复需求。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold" data-lang-key="product2_feature2">高效便捷</h4>
+                            <p class="text-gray-600" data-lang-key="product2_feature2_desc">即插即用设计，大幅缩短维修时间，轻松上手。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold" data-lang-key="product2_feature3">品质保障</h4>
+                            <p class="text-gray-600" data-lang-key="product2_feature3_desc">采用高品质线材与精密接口，严格兼容苹果各机型电池接口，经过多重测试，</p>
+                        </div>
+                    </div>
+                    <!-- 新增跳转链接按钮 -->
+                    <a href="battery-cables.html" class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-lg">
+                        <span data-lang-key="view_cable_list">查看排线型号列表</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <div class="order-1 md:order-2 fade-in">
+                    <img src="images/产品图片2.jpg.png" alt="制造业案例" class="rounded-lg shadow-xl w-full" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 应用下载 
+    <section id="download" class="py-20 bg-gradient-to-br from-primary via-primary/90 to-secondary text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">移动<span class="text-white" data-lang-key="app_download">应用下载</span></h2>
+                <p class="text-gray-200 max-w-2xl mx-auto" data-lang-key="app_download_desc">随时随地访问我们的服务，提升工作效率。</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <img src="https://p11-flow-imagex-sign.byteimg.com/tos-cn-i-a9rns2rl98/rc/pc/super_tool/6955436c503f4ca488e414fd8b18a40b~tplv-a9rns2rl98-image.image?lk3s=8e244e95&rcl=20260228142147C752C0CA7D49538D132F&rrcfp=f06b921b&x-expires=1774851798&x-signature=M0pzRcRUprp7AqIKA1qnj7KoEcA%3D" 
+                         alt="HF电子科技 移动应用" 
+                         class="w-full max-w-md mx-auto rounded-3xl shadow-2xl border-8 border-white animate-float"
+                         loading="lazy">
+                </div>
+                <div class="fade-in">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6" data-lang-key="mobile_app">HF电子科技 移动应用</h3>
+                    <p class="text-lg mb-8 text-gray-200" data-lang-key="mobile_app_desc">
+                        通过我们的移动应用，您可以随时随地访问HF电子科技的所有服务，实时监控业务数据，接收重要通知，快速响应市场变化。
+                    </p>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center">
+                            <div class="bg-white/20 rounded-full p-2 mr-4">
+                                <i class="fas fa-chart-pie text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg" data-lang-key="app_feature1">实时数据分析</h4>
+                                <p class="text-gray-200" data-lang-key="app_feature1_desc">随时查看关键业务指标和数据报表</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-white/20 rounded-full p-2 mr-4">
+                                <i class="fas fa-bell text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg" data-lang-key="app_feature2">智能通知</h4>
+                                <p class="text-gray-200" data-lang-key="app_feature2_desc">接收重要事件和异常情况的实时通知</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="bg-white/20 rounded-full p-2 mr-4">
+                                <i class="fas fa-tasks text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg" data-lang-key="app_feature3">任务管理</h4>
+                                <p class="text-gray-200" data-lang-key="app_feature3_desc">分配和跟踪任务，提高团队协作效率</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <button class="download-btn bg-black text-white px-6 py-3 rounded-lg flex items-center">
+                            <i class="fab fa-apple text-2xl mr-3"></i>
+                            <div class="text-left">
+                                <div class="text-xs" data-lang-key="download">下载</div>
+                                <div class="font-bold">App Store</div>
+                            </div>
+                        </button>
+                        <button class="download-btn bg-black text-white px-6 py-3 rounded-lg flex items-center">
+                            <i class="fab fa-google-play text-2xl mr-3"></i>
+                            <div class="text-left">
+                                <div class="text-xs" data-lang-key="download">下载</div>
+                                <div class="font-bold">Google Play</div>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <p class="text-sm text-gray-200" data-lang-key="scan_qr">扫描二维码下载应用</p>
+                        <div class="mt-2 bg-white p-2 inline-block rounded-lg">
+                            <div class="w-24 h-24 bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-qrcode text-4xl text-gray-700"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	-->
+
+    <!-- 关于我们 -->
+<section id="about" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4"> <span class="gradient-text" data-lang-key="about_brand">HF电子科技</span></h2>
+            <p class="text-gray-600 max-w-2xl mx-auto" data-lang-key="about_desc">我们是一家专注于科技创新的企业，致力于为客户提供最前沿的技术解决方案。</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="fade-in">
+                <img src="images/关于我们背景.png" 
+                     alt="关于HF电子科技" 
+                     class="rounded-lg shadow-xl w-full"
+                     loading="lazy">
+            </div>
+            <div class="fade-in">
+                <h3 class="text-2xl font-bold mb-6 text-primary" data-lang-key="our_mission">我们的使命</h3>
+                <p class="text-gray-700 mb-6" data-lang-key="mission_desc">
+                    通过创新技术赋能企业，推动行业变革，创造可持续价值。我们相信科技的力量能够解决当今世界面临的复杂挑战。
+                </p>
+                
+                <h3 class="text-2xl font-bold mb-6 text-primary" data-lang-key="core_strengths">核心优势</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="bg-primary text-white rounded-full p-2 mr-4">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg" data-lang-key="strength1">持续创新</h4>
+                            <p class="text-gray-600" data-lang-key="strength1_desc">不断探索前沿技术，为客户提供创新解决方案</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-primary text-white rounded-full p-2 mr-4">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg" data-lang-key="strength2">专业团队</h4>
+                            <p class="text-gray-600" data-lang-key="strength2_desc">拥有行业领先的技术专家和顾问团队</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="bg-primary text-white rounded-full p-2 mr-4">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg" data-lang-key="strength3">客户至上</h4>
+                            <p class="text-gray-600" data-lang-key="strength3_desc">深入理解客户需求，提供个性化解决方案</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- 联系我们 - 移除表单，仅保留联系方式 -->
+    <section id="contact" class="py-20 bg-subtle-pattern">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4"> <span class="gradient-text" data-lang-key="contact_us">我们</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto" data-lang-key="contact_desc">无论您有任何问题或需求，我们的团队随时为您提供支持。</p>
+            </div>
+            
+            <div class="mx-auto max-w-3xl">
+                <div class="fade-in">
+                    <div class="bg-white rounded-lg shadow-lg p-8 h-full">
+                        <h3 class="text-2xl font-bold mb-6 text-primary" data-lang-key="contact_info">联系方式</h3>
+                        
+                        <div class="space-y-6 mb-8">
+                            <div class="flex items-start">
+                                <div class="bg-primary text-white rounded-full p-3 mr-4">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg" data-lang-key="address">公司地址</h4>
+                                    <p class="text-gray-600" data-lang-key="address_detail">广东深圳, 中港通讯城</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary text-white rounded-full p-3 mr-4">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg" data-lang-key="phone">电话</h4>
+                                    <p class="text-gray-600">+86 13530936636</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary text-white rounded-full p-3 mr-4">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-lg" data-lang-key="email">邮箱</h4>
+                                    <p class="text-gray-600">QILIN1267@163.com</p>
+                                </div>
+                            </div>
+                            <!-- 移除工作时间 -->
+                        </div>
+                        
+                        <h3 class="text-xl font-bold mb-4 text-primary" data-lang-key="follow_us">关注我们</h3>
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-icon bg-gray-100 hover:bg-gray-200 text-primary rounded-full p-3 transition-all duration-300">
+                                <i class="fab fa-weixin text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-gray-100 hover:bg-gray-200 text-primary rounded-full p-3 transition-all duration-300">
+                                <i class="fab fa-weibo text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-gray-100 hover:bg-gray-200 text-primary rounded-full p-3 transition-all duration-300">
+                                <i class="fab fa-linkedin text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon bg-gray-100 hover:bg-gray-200 text-primary rounded-full p-3 transition-all duration-300">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h3 class="text-xl font-bold mb-4 text-primary" data-lang-key="faq">常见问题</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-question-circle text-secondary mr-2"></i>
+                                    <a href="#" class="text-gray-600 hover:text-primary" data-lang-key="faq1">如何申请产品演示？</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-question-circle text-secondary mr-2"></i>
+                                    <a href="#" class="text-gray-600 hover:text-primary" data-lang-key="faq2">产品定价策略是什么？</a>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-question-circle text-secondary mr-2"></i>
+                                    <a href="#" class="text-gray-600 hover:text-primary" data-lang-key="faq3">如何获取技术支持？</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 - 移除产品服务、关于我们板块，仅保留品牌和联系我们，新增二维码区域 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4" data-lang-key="brand_name">HF<span class="text-secondary">电子科技</span></h3>
+                    <p class="text-gray-400 mb-4" data-lang-key="footer_desc">
+                        引领科技创新，驱动未来发展。为企业提供前沿的技术解决方案。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-all duration-300">
+                            <i class="fab fa-weixin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-all duration-300">
+                            <i class="fab fa-weibo"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-all duration-300">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-secondary transition-all duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4" data-lang-key="contact_us">联系我们</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-secondary"></i>
+                            <span class="text-gray-400" data-lang-key="address_detail">广东深圳, 中港通讯城</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-secondary"></i>
+                            <span class="text-gray-400">+86 13530936636</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-secondary"></i>
+                            <span class="text-gray-400">QILIN1267@163.com</span>
+                        </li>
+                    </ul>
+                    
+                    <!-- 新增：三个二维码展示区 -->
+                    <div class="mt-6">
+                        <p class="text-sm text-gray-400 mb-3">扫码关注/下载/联系我们</p>
+                        <div class="flex gap-4 justify-start">
+                            <!-- 第一个二维码 -->
+                            <div class="bg-white p-2 rounded-lg">
+                                <div class="w-24 h-24 bg-gray-200 flex items-center justify-center">
+                                    <img src="images/wechat-qrcode.jpg" alt="描述" class="w-full h-full">
+                                </div>
+                                <p class="text-xs text-center mt-1 text-gray-400">微信客服</p>
+                            </div>
+                            <!-- 第二个二维码 -->
+                            <div class="bg-white p-2 rounded-lg">
+                                <div class="w-24 h-24 bg-gray-200 flex items-center justify-center">
+                                    <img src="images/official-qrcode.jpg" alt="描述" class="w-full h-full">
+                                </div>
+                                <p class="text-xs text-center mt-1 text-gray-400">公众号</p>
+                            </div>
+                            <!-- 第三个二维码 -->
+                            <div class="bg-white p-2 rounded-lg">
+                                <div class="w-24 h-24 bg-gray-200 flex items-center justify-center">
+                                    <img src="images/custom-qrcode.jpg" alt="描述" class="w-full h-full">
+                                </div>
+                                <p class="text-xs text-center mt-1 text-gray-400">Whats</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0" data-lang-key="copyright">
+                    &copy; 2023 HF电子科技. 保留所有权利。
+                </p>
+                <!-- 移除隐私政策、服务条款、网站地图 -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 bg-primary text-white rounded-full p-3 shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-primary-dark">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript - 修复语言切换逻辑 -->
+    <script>
+        function throttle(func, delay) {
+            let timer = null;
+            return function() {
+                if (!timer) {
+                    timer = setTimeout(() => {
+                        func.apply(this, arguments);
+                        timer = null;
+                    }, delay);
+                }
+            }
+        }
+
+        const translations = {
+            zh: {
+                brand_name: 'HF<span class="text-secondary">电子科技</span>',
+                about_brand: 'HF电子科技',
+                nav_home: '首页',
+                nav_products: '产品服务',
+                nav_cables: '排线型号列表',
+                nav_tutorials: '教程中心',
+                nav_download: '应用下载',
+                nav_about: '关于我们',
+                nav_contact: '联系我们',
+                hero_title1: '引领<span class="text-secondary">科技</span>创新',
+                hero_title2: '驱动<span class="text-secondary">未来</span>发展',
+                hero_desc: '专注电池修复技术研发，为维修行业提供高效、可靠的解决方案，让技术创新赋能维修效率提升',
+                explore_products: '探索产品',
+                contact_us: '联系我们',
+                scroll_down: '向下滚动',
+                core_products: '核心产品',
+                core_products_desc: '专注电池修复领域，打造高效、易用的维修工具和配件',
+                product1_name: 'HF多功能编程修复仪',
+                product1_desc: '为多功能编程修复仪，专为电池排线维修场景打造，核心搭载电池快速修复黑科技，一键修复电池。',
+                product1_feature1: '电池快速修复',
+                product1_feature1_desc: '高效修复流程，大幅缩短维修时间，专业维修效率翻倍',
+                product1_feature2: '多功能编程修复',
+                product1_feature2_desc: '支持多种设备覆盖 8-15 全机型,你的全能助手',
+                product1_feature3: '便捷操作',
+                product1_feature3_desc: '可视化操作逻辑，搭配清晰指引，无需复杂专业知识，一键启动修复。',
+                product2_name: '电池修复排线',
+                product2_desc: 'HF 苹果全系列电池修复排线,精准修复电池健康度，可搭配 HF 多功能编程修复仪!',
+                product2_feature1: '适配无忧',
+                product2_feature1_desc: '8-15 全机型覆盖,一套排线搞定所有苹果设备电池修复需求。',
+                product2_feature2: '高效便捷',
+                product2_feature2_desc: '即插即用设计，大幅缩短维修时间，轻松上手。',
+                product2_feature3: '品质保障',
+                product2_feature3_desc: '采用高品质线材与精密接口，严格兼容苹果各机型电池接口，经过多重测试，',
+                view_cable_list: '查看排线型号列表',
+                tutorial_center: '教程中心',
+                tutorial_desc: '这里提供详细的使用教程和操作视频，帮助你快速上手我们的产品',
+                video_coming_soon: '视频即将上线',
+                tutorial1_title: '电池修复排线使用教程',
+                tutorial1_desc: '详细介绍电池修复排线的安装和使用方法',
+                tutorial2_title: '多功能编程修复仪操作指南',
+                tutorial2_desc: '学习如何使用多功能编程修复仪进行高效维修',
+                tutorial3_title: '常见问题排查',
+                tutorial3_desc: '解决使用过程中遇到的常见问题和故障排除',
+                duration: '时长: 待更新',
+                app_download: '应用下载',
+                app_download_desc: '随时随地访问我们的服务，提升工作效率。',
+                mobile_app: 'HF电子科技 移动应用',
+                mobile_app_desc: '通过我们的移动应用，您可以随时随地访问HF电子科技的所有服务，实时监控业务数据，接收重要通知，快速响应市场变化。',
+                app_feature1: '实时数据分析',
+                app_feature1_desc: '随时查看关键业务指标和数据报表',
+                app_feature2: '智能通知',
+                app_feature2_desc: '接收重要事件和异常情况的实时通知',
+                app_feature3: '任务管理',
+                app_feature3_desc: '分配和跟踪任务，提高团队协作效率',
+                download: '下载',
+                scan_qr: '扫描二维码下载应用',
+                about_desc: '我们是一家专注于科技创新的企业，致力于为客户提供最前沿的技术解决方案，帮助企业实现数字化转型。',
+                our_mission: '我们的使命',
+                mission_desc: '通过创新技术赋能企业，推动行业变革，创造可持续价值。我们相信科技的力量能够解决当今世界面临的复杂挑战。',
+                core_strengths: '核心优势',
+                strength1: '持续创新',
+                strength1_desc: '不断探索前沿技术，为客户提供创新解决方案',
+                strength2: '专业团队',
+                strength2_desc: '拥有行业领先的技术专家和顾问团队',
+                strength3: '客户至上',
+                strength3_desc: '深入理解客户需求，提供个性化解决方案',
+                stats1: '年行业经验',
+                stats2: '企业客户',
+                stats3: '技术专利',
+                stats4: '客户满意度 %',
+                contact_desc: '无论您有任何问题或需求，我们的团队随时为您提供支持。',
+                contact_info: '联系方式',
+                address: '公司地址',
+                address_detail: '广东深圳, 中港通讯城',
+                phone: '电话',
+                email: '邮箱',
+                working_hours: '工作时间',
+                working_hours_detail: '周一至周五: 9:00 - 18:00',
+                follow_us: '关注我们',
+                faq: '常见问题',
+                faq1: '如何申请产品演示？',
+                faq2: '产品定价策略是什么？',
+                faq3: '如何获取技术支持？',
+                footer_desc: '引领科技创新，驱动未来发展。为企业提供前沿的技术解决方案。',
+                copyright: '&copy; 2023 HF电子科技. 保留所有权利。',
+                privacy_policy: '隐私政策',
+                terms: '服务条款',
+                sitemap: '网站地图'
+            },
+            en: {
+                brand_name: 'HF<span class="text-secondary">Electronic Technology</span>',
+                about_brand: 'HF Electronic Technology',
+                nav_home: 'Home',
+                nav_products: 'Products & Services',
+                nav_cables: 'Cable Models List',
+                nav_tutorials: 'Tutorial Center',
+                nav_download: 'App Download',
+                nav_about: 'About Us',
+                nav_contact: 'Contact Us',
+                hero_title1: 'Leading <span class="text-secondary">Tech</span> Innovation',
+                hero_title2: 'Driving <span class="text-secondary">Future</span> Development',
+                hero_desc: 'Specializing in battery repair technology R&D, providing efficient and reliable solutions for the repair industry, empowering repair efficiency through technological innovation',
+                explore_products: 'Explore Products',
+                contact_us: 'Contact Us',
+                scroll_down: 'Scroll Down',
+                core_products: 'Core Products',
+                core_products_desc: 'Focus on battery repair field, create efficient and easy-to-use repair tools and accessories',
+                product1_name: 'HF Multi-functional Programming Repair Instrument',
+                product1_desc: 'Multi-functional programming repair instrument, specially built for battery cable repair scenarios, with core battery fast repair black technology, one-click battery repair.',
+                product1_feature1: 'Fast Battery Repair',
+                product1_feature1_desc: 'Efficient repair process, greatly reducing repair time, doubling professional repair efficiency',
+                product1_feature2: 'Multi-functional Programming Repair',
+                product1_feature2_desc: 'Supports multiple devices covering all models 8-15, your all-round assistant',
+                product1_feature3: 'Easy Operation',
+                product1_feature3_desc: 'Visual operation logic with clear guidelines, no complex professional knowledge required, one-click start repair.',
+                product2_name: 'Battery Repair Cable',
+                product2_desc: 'HF Apple full series battery repair cable, accurately repair battery health, can be used with HF multi-functional programming repair instrument!',
+                product2_feature1: 'Universal Compatibility',
+                product2_feature1_desc: 'Covers all models 8-15, one set of cables meets all Apple device battery repair needs.',
+                product2_feature2: 'High Efficiency & Convenience',
+                product2_feature2_desc: 'Plug-and-play design, greatly reducing repair time, easy to get started.',
+                product2_feature3: 'Quality Assurance',
+                product2_feature3_desc: 'Using high-quality wires and precision interfaces, strictly compatible with battery interfaces of various Apple models, tested multiple times.',
+                view_cable_list: 'View Cable Models List',
+                tutorial_center: 'Tutorial Center',
+                tutorial_desc: 'Detailed usage tutorials and operation videos are provided here to help you quickly get started with our products',
+                video_coming_soon: 'Video Coming Soon',
+                tutorial1_title: 'Battery Repair Cable Usage Tutorial',
+                tutorial1_desc: 'Detailed introduction to the installation and usage of battery repair cables',
+                tutorial2_title: 'Multi-functional Programming Repair Instrument Operation Guide',
+                tutorial2_desc: 'Learn how to use the multi-functional programming repair instrument for efficient maintenance',
+                tutorial3_title: 'Troubleshooting Common Problems',
+                tutorial3_desc: 'Solve common problems and troubleshoot faults encountered during use',
+                duration: 'Duration: To be updated',
+                app_download: 'App Download',
+                app_download_desc: 'Access our services anytime, anywhere to improve work efficiency.',
+                mobile_app: 'HF Electronic Technology Mobile App',
+                mobile_app_desc: 'Through our mobile app, you can access all services of HF Electronic Technology anytime, anywhere, monitor business data in real time, receive important notifications, and respond to market changes quickly.',
+                app_feature1: 'Real-time Data Analysis',
+                app_feature1_desc: 'View key business indicators and data reports at any time',
+                app_feature2: 'Intelligent Notifications',
+                app_feature2_desc: 'Receive real-time notifications of important events and abnormal situations',
+                app_feature3: 'Task Management',
+                app_feature3_desc: 'Assign and track tasks to improve team collaboration efficiency',
+                download: 'Download',
+                scan_qr: 'Scan QR code to download the app',
+                about_desc: 'We are an enterprise focusing on technological innovation, committed to providing customers with the most cutting-edge technical solutions to help enterprises achieve digital transformation.',
+                our_mission: 'Our Mission',
+                mission_desc: 'Empowering enterprises through innovative technologies, driving industry transformation, and creating sustainable value. We believe in the power of technology to solve complex challenges facing the world today.',
+                core_strengths: 'Core Strengths',
+                strength1: 'Continuous Innovation',
+                strength1_desc: 'Continuously explore cutting-edge technologies to provide innovative solutions for customers',
+                strength2: 'Professional Team',
+                strength2_desc: 'Has industry-leading technical experts and consultant teams',
+                strength3: 'Customer First',
+                strength3_desc: 'Deeply understand customer needs and provide personalized solutions',
+                stats1: 'Years of Industry Experience',
+                stats2: 'Enterprise Customers',
+                stats3: 'Technical Patents',
+                stats4: 'Customer Satisfaction %',
+                contact_desc: 'Our team is always ready to support you with any questions or needs you may have.',
+                contact_info: 'Contact Information',
+                address: 'Company Address',
+                address_detail: 'Zhonggang Communication City, Shenzhen, Guangdong',
+                phone: 'Phone',
+                email: 'Email',
+                working_hours: 'Working Hours',
+                working_hours_detail: 'Monday to Friday: 9:00 - 18:00',
+                follow_us: 'Follow Us',
+                faq: 'Frequently Asked Questions',
+                faq1: 'How to apply for a product demonstration?',
+                faq2: 'What is the product pricing strategy?',
+                faq3: 'How to get technical support?',
+                footer_desc: 'Leading technological innovation and driving future development. Providing cutting-edge technical solutions for enterprises.',
+                copyright: '&copy; 2023 HF Electronic Technology. All rights reserved.',
+                privacy_policy: 'Privacy Policy',
+                terms: 'Terms of Service',
+                sitemap: 'Site Map'
+            },
+            ar: {
+                brand_name: 'HF<span class="text-secondary">التكنولوجيا الإلكترونية</span>',
+                about_brand: 'تكنولوجيا HF الإلكترونية',
+                nav_home: 'الصفحة الرئيسية',
+                nav_products: 'المنتجات والخدمات',
+                nav_cables: 'قائمة أنواع الكابلات',
+                nav_tutorials: 'مركز الدروس التعليمية',
+                nav_download: 'تنزيل التطبيق',
+                nav_about: 'معلومات عنا',
+                nav_contact: 'اتصل بنا',
+                hero_title1: 'قيادة <span class="text-secondary">الابتكار</span> التكنولوجي',
+                hero_title2: 'دفع <span class="text-secondary">التطوير</span> المستقبلي',
+                hero_desc: 'متخصصون في أبحاث وتطوير تقنيات إصلاح البطاريات، ونقدم حلول فعالة وموثوقة للصناعة الإصلاحية، ونعزز كفاءة الإصلاح من خلال الابتكار التكنولوجي',
+                explore_products: 'استكشاف المنتجات',
+                contact_us: 'اتصل بنا',
+                scroll_down: 'الانتقال لأسفل',
+                core_products: 'المنتجات الأساسية',
+                core_products_desc: 'ركز على مجال إصلاح البطاريات، وإنشاء أدوات وملحقات إصلاح فعالة وسهلة الاستخدام',
+                product1_name: 'جهاز إصلاح برمجي متعدد الوظائف HF',
+                product1_desc: 'جهاز إصلاح برمجي متعدد الوظائف، مصمم خصيصًا لسيناريوهات إصلاح كابلات البطاريات، مع تكنولوجيا سريعة لإصلاح البطاريات، إصلاح البطارية بنقرة واحدة.',
+                product1_feature1: 'إصلاح بطارية سريع',
+                product1_feature1_desc: 'عملية إصلاح فعالة، تقلل بشكل كبير من وقت الإصلاح، وتضاعف كفاءة الإصلاح المهني',
+                product1_feature2: 'إصلاح برمجي متعدد الوظائف',
+                product1_feature2_desc: 'يدعم أجهزة متعددة تغطي جميع النماذج 8-15، مساعدك الشامل',
+                product1_feature3: 'سهولة التشغيل',
+                product1_feature3_desc: 'منطق تشغيل مرئي مع إرشادات واضحة، لا توجد حاجة إلى معرفة مهنية معقدة، بدء الإصلاح بنقرة واحدة.',
+                product2_name: 'كابل إصلاح البطارية',
+                product2_desc: 'كابل إصلاح بطارية سلسلة آبل الكاملة من HF، إصلاح دقيق لصحة البطارية، يمكن استخدامه مع جهاز إصلاح برمجي متعدد الوظائف HF!',
+                product2_feature1: 'التوافق السهل',
+                product2_feature1_desc: 'يغطي جميع النماذج 8-15، مجموعة كابلات تغطي جميع احتياجات إصلاح بطاريات أجهزة آبل.',
+                product2_feature2: 'الكفاءة والوضوح',
+                product2_feature2_desc: 'تصميم توصيل واستخدام سريع، يقلل بشكل كبير من وقت الإصلاح، وسهل التعلم.',
+                product2_feature3: 'ضمان الجودة',
+                product2_feature3_desc: 'باستخدام سلكات عالية الجودة وواجهات دقيقة، متوافقة بصرامة مع واجهات بطاريات مختلفة نماذج آبل، تم اختبارها عدة مرات.',
+                view_cable_list: 'عرض قائمة أنواع الكابلات',
+                tutorial_center: 'مركز الدروس التعليمية',
+                tutorial_desc: 'يتم توفير دروس تعليمية مفصلة وفيديوهات تشغيل هنا لمساعدتك على التعرف سريعًا على منتجاتنا',
+                video_coming_soon: 'الفيديو قادم قريبًا',
+                tutorial1_title: 'دورة تعليمية استخدام كابل إصلاح البطارية',
+                tutorial1_desc: 'مقدمة مفصلة لطريقة تركيب واستخدام كابل إصلاح البطارية',
+                tutorial2_title: 'دليل تشغيل جهاز إصلاح برمجي متعدد الوظائف',
+                tutorial2_desc: 'تعلم كيفية استخدام جهاز إصلاح برمجي متعدد الوظائف للإصلاح بكفاءة عالية',
+                tutorial3_title: 'استكشاف المشكلات الشائعة',
+                tutorial3_desc: 'حل المشكلات الشائعة وإصلاح العيوب التي تظهر أثناء الاستخدام',
+                duration: 'المدة: سيتم تحديثها قريبًا',
+                app_download: 'تنزيل التطبيق',
+                app_download_desc: 'الوصول لخدماتنا في أي وقت وفي أي مكان لتحسين كفاءة العمل.',
+                mobile_app: 'تطبيق HF للتكنولوجيا الإلكترونية للجوال',
+                mobile_app_desc: 'من خلال تطبيقنا المحمول، يمكنك الوصول لجميع خدمات HF للتكنولوجيا الإلكترونية في أي وقت وفي أي مكان، مراقبة بيانات الأعمال في الوقت الفعلي، وتلقي الإخطارات الهامة، والاستجابة سريعًا لتغيرات السوق.',
+                app_feature1: 'تحليل البيانات في الوقت الفعلي',
+                app_feature1_desc: 'عرض مؤشرات الأعمال الرئيسية وتقارير البيانات في أي وقت',
+                app_feature2: 'إخطارات ذكية',
+                app_feature2_desc: 'تلقي إخطارات فورية لأحداث مهمة وحالات غير طبيعية',
+                app_feature3: 'إدارة المهام',
+                app_feature3_desc: 'تعيين وتتبع المهام لتحسين كفاءة تعاون الفريق',
+                download: 'تنزيل',
+                scan_qr: 'مسح رمز الاستجابة السريعة لتنزيل التطبيق',
+                about_desc: 'نحن شركة تركز على الابتكار التكنولوجي، نلتزم بتوفير أحدث حلول تقنية لعملائنا لمساعدتهم على تحقيق التحول الرقمي.',
+                our_mission: 'مهمتنا',
+                mission_desc: 'تمكين الشركات من خلال التقنيات المبتكرة، دفع التحول الصناعي، وخلق قيمة مستدامة. نؤمن بقوة التكنولوجيا في حل التحديات المعقدة التي تواجه العالم اليوم.',
+                core_strengths: 'نقاط القوة الأساسية',
+                strength1: 'الابتكار المستمر',
+                strength1_desc: 'استكشاف مستمر للتقنيات المتقدمة لتقديم حلول مبتكرة للعملاء',
+                strength2: 'فريق محترف',
+                strength2_desc: 'يتمتع بفريق من الخبراء التقنيين والمستشارين الرائدين في الصناعة',
+                strength3: 'العميل في المقام الأول',
+                strength3_desc: 'فهم عميق لاحتياجات العملاء وتقديم حلول مخصصة',
+                stats1: 'سنوات من الخبرة في الصناعة',
+                stats2: 'عملاء الشركات',
+                stats3: 'براءات الاختراع التقنية',
+                stats4: 'رضا العملاء %',
+                contact_desc: 'فريقنا دائمًا على استعداد لدعمك بأي أسئلة أو احتياجات قد تكون لديك.',
+                contact_info: 'معلومات الاتصال',
+                address: 'عنوان الشركة',
+                address_detail: 'مدينة الاتصالات بين الخليج، شنتشن، قوانغدونغ',
+                phone: 'الهاتف',
+                email: 'البريد الإلكتروني',
+                working_hours: 'ساعات العمل',
+                working_hours_detail: 'من الاثنين إلى الجمعة: 9:00 - 18:00',
+                follow_us: 'تابعنا',
+                faq: 'أسئلة متكررة',
+                faq1: 'كيفية تقديم طلب لعرض المنتج؟',
+                faq2: 'ما هي استراتيجية تسعير المنتجات؟',
+                faq3: 'كيفية الحصول على الدعم الفني؟',
+                footer_desc: 'قيادة الابتكار التكنولوجي ودفع التطوير المستقبلي. توفير حلول تقنية متقدمة للشركات.',
+                copyright: '&copy; 2023 تكنولوجيا HF الإلكترونية. جميع الحقوق محفوظة.',
+                privacy_policy: 'سياسة الخصوصية',
+                terms: 'شروط الخدمة',
+                sitemap: 'خريطة الموقع'
+            }
+        };
+
+        // 初始化语言切换
+        document.addEventListener('DOMContentLoaded', function() {
+            // 语言切换事件
+            const langOptions = document.querySelectorAll('.lang-option');
+            langOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    changeLanguage(lang);
+                });
+            });
+
+            // 移动端菜单切换
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // 返回顶部按钮
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', throttle(function() {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                    backToTopBtn.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                    backToTopBtn.classList.remove('opacity-100', 'visible');
+                }
+            }, 100));
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // 导航链接激活状态
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', throttle(function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (scrollY >= (sectionTop - 100)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }, 100));
+
+            // 初始化GSAP动画
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // 淡入动画
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((el, index) => {
+                gsap.set(el, { opacity: 0, y: 20 });
+                gsap.to(el, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    delay: index * 0.2,
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+        });
+
+        // 切换语言函数
+        function changeLanguage(lang) {
+            // 更新HTML属性
+            document.documentElement.setAttribute('lang', lang === 'zh' ? 'zh-CN' : lang === 'en' ? 'en' : 'ar');
+            document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+            document.body.setAttribute('data-lang', lang);
+            
+            // 更新当前语言显示
+            document.getElementById('current-lang').textContent = 
+                lang === 'zh' ? '中文' : lang === 'en' ? 'English' : 'العربية';
+            
+            // 更新所有翻译文本
+            document.querySelectorAll('[data-lang-key]').forEach(el => {
+                const key = el.getAttribute('data-lang-key');
+                if (translations[lang] && translations[lang][key]) {
+                    // 如果包含HTML标签，使用innerHTML
+                    if (translations[lang][key].includes('<')) {
+                        el.innerHTML = translations[lang][key];
+                    } else {
+                        el.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // 保存语言偏好到本地存储
+            localStorage.setItem('preferred-language', lang);
+        }
+    </script>
+</body>
+</html>
