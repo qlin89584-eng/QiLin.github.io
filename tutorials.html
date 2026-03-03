@@ -155,35 +155,6 @@
             left: 0;
         }
         
-        /* 视频播放模态框样式 */
-        .video-modal {
-            z-index: 100;
-        }
-        .video-player-container {
-            aspect-ratio: 16/9;
-            width: 100%;
-            max-width: 1200px;
-            /* 确保视频容器不被遮挡 */
-            position: relative;
-            z-index: 1;
-        }
-        /* 确保视频元素正常显示 */
-        #mainVideoPlayer {
-            display: block;
-            background: #000;
-        }
-        /* 视频加载错误提示样式 */
-        .video-error提示 {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            z-index: 2;
-        }
-        
         /* 平滑滚动 */
         html {
             scroll-behavior: smooth;
@@ -318,14 +289,13 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- 教程1：HF多功能编程修复仪使用教程 -->
                 <div class="video-card-hover bg-white rounded-xl shadow-md overflow-hidden cursor-pointer" 
-                     onclick="openVideoPlayer('videos/repair-instrument-basic.mp4', ' ')">
+                     onclick="openBilibiliLink('https://www.bilibili.com/video/BV16XP7zyE9h/')">
                     <div class="aspect-video relative">
                         <!-- 使用视频封面图（请确保此图片文件存在） -->
                         <img src="images/tutorial-1-cover.jpg" alt="HF多功能编程修复仪使用教程" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-dark/30 flex items-center justify-center">
                             <i class="fas fa-play text-white text-3xl"></i>
                         </div>
-                        <!-- 已删除视频时长显示 -->
                     </div>
                     <div class="p-4">
                         <h4 class="font-bold text-lg mb-2 line-clamp-2">HF多功能编程修复仪使用教程</h4>
@@ -337,80 +307,40 @@
 
                 <!-- 教程2：排线安装教程 -->
                 <div class="video-card-hover bg-white rounded-xl shadow-md overflow-hidden cursor-pointer"
-                     onclick="openVideoPlayer('videos/cable-install.mp4', ' ')">
+                     onclick="openBilibiliLink('https://www.bilibili.com/video/BV1rXP7zyEGt/')">
                     <div class="aspect-video relative">
                         <img src="images/tutorial-2-cover.jpg" alt="HF Multifunctional Programming Repair Device User Guide" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-dark/30 flex items-center justify-center">
                             <i class="fas fa-play text-white text-3xl"></i>
                         </div>
-                        <!-- 已删除视频时长显示 -->
                     </div>
                     <div class="p-4">
                         <h4 class="font-bold text-lg mb-2 line-clamp-2">HF Multifunctional Programming Repair Device User Guide</h4>
                         <p class="text-gray-600 text-sm line-clamp-2">
-                             。
+                            Detailed explanation of the functions and operation methods of the HF multifunctional programming repair instrument.
                         </p>
                     </div>
                 </div>
 
                 <!-- 教程3：常见故障排查 -->
                 <div class="video-card-hover bg-white rounded-xl shadow-md overflow-hidden cursor-pointer"
-                     onclick="openVideoPlayer('videos/troubleshooting-common.mp4', ' ')">
+                     onclick="openBilibiliLink('https://www.bilibili.com/video/BV16XP7zyE6g/')">
                     <div class="aspect-video relative">
-                        <img src="images/tutorial-3-cover.jpg" alt=" " class="w-full h-full object-cover">
+                        <img src="images/tutorial-3-cover.jpg" alt="دليل معدات الصيانة القابلة للبرمجة متعددة الوظائف HF" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-dark/30 flex items-center justify-center">
                             <i class="fas fa-play text-white text-3xl"></i>
                         </div>
-                        <!-- 已删除视频时长显示 -->
                     </div>
                     <div class="p-4">
                         <h4 class="font-bold text-lg mb-2 line-clamp-2">دليل معدات الصيانة القابلة للبرمجة متعددة الوظائف HF</h4>
                         <p class="text-gray-600 text-sm line-clamp-2">
-                             
+                            شرح مفصل لوظائف وأساليب تشغيل جهاز إصلاح البرمجة متعدد الوظائف HF.
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- 视频播放模态框 -->
-    <div id="videoModal" class="fixed inset-0 bg-black/90 video-modal flex items-center justify-center hidden">
-        <div class="w-full max-w-5xl mx-4">
-            <!-- 关闭按钮 -->
-            <button onclick="closeVideoPlayer()" class="absolute top-8 right-8 text-white text-3xl hover:text-secondary transition-colors z-10">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <!-- 视频播放器容器 -->
-            <div class="video-player-container bg-dark-DEFAULT rounded-lg overflow-hidden">
-                <!-- 视频错误提示容器 -->
-                <div id="videoError提示" class="video-error提示 hidden">
-                    <i class="fas fa-exclamation-triangle text-4xl mb-4 text-secondary"></i>
-                    <h3 class="text-xl mb-2">视频播放异常</h3>
-                    <p class="mb-4">可能是视频编码不兼容或文件损坏</p>
-                    <button onclick="reloadVideo()" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg transition-colors">
-                        重新加载视频
-                    </button>
-                </div>
-                
-                <video id="mainVideoPlayer" class="w-full h-full" controls preload="metadata" poster="">
-                    <!-- 主视频源（H.264编码） -->
-                    <source id="videoSource" src="" type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;">
-                    <!-- 备用视频源（兼容格式） -->
-                    <source src="" type="video/webm">
-                    <source src="" type="video/ogg">
-                    你的浏览器不支持HTML5视频播放，请更新到最新版本的浏览器（推荐Chrome、Edge、Firefox），或检查视频文件是否为H.264编码的MP4格式。
-                </video>
-            </div>
-            
-            <!-- 视频信息 -->
-            <div class="mt-6 text-white">
-                <h2 id="videoTitleDisplay" class="text-2xl font-bold mb-2"></h2>
-                <p id="videoDescDisplay" class="text-gray-300"></p>
-            </div>
-        </div>
-    </div>
 
     <!-- 页脚（修改为统一的联系信息并适配多语言，添加第三个二维码） -->
     <footer class="bg-dark text-white py-12">
@@ -678,110 +608,11 @@
             handleScroll();
         }
 
-        // 全局变量存储当前视频信息
-        let currentVideoInfo = {
-            src: '',
-            title: '',
-            desc: ''
-        };
-
-        // 视频播放相关函数
-        function openVideoPlayer(videoSrc, title, desc) {
-            const modal = document.getElementById('videoModal');
-            const videoPlayer = document.getElementById('mainVideoPlayer');
-            const videoSource = document.getElementById('videoSource');
-            const videoTitle = document.getElementById('videoTitleDisplay');
-            const videoDesc = document.getElementById('videoDescDisplay');
-            const videoError提示 = document.getElementById('videoError提示');
-            
-            // 存储当前视频信息
-            currentVideoInfo = { src: videoSrc, title: title, desc: desc };
-            
-            // 隐藏错误提示
-            videoError提示.classList.add('hidden');
-            
-            // 设置视频源和信息
-            videoSource.src = videoSrc;
-            videoSource.type = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'; // 指定H.264编码
-            videoPlayer.poster = videoSrc.replace('.mp4', '-cover.jpg').replace('videos/', 'images/tutorial-'); // 匹配封面图
-            videoTitle.textContent = title;
-            videoDesc.textContent = desc;
-            
-            // 加载视频
-            videoPlayer.load();
-            
-            // 显示模态框
-            modal.classList.remove('hidden');
-            // 禁止页面滚动
-            document.body.style.overflow = 'hidden';
-            
-            // 尝试自动播放（受浏览器策略限制）
-            videoPlayer.play().catch(err => {
-                console.log('自动播放被浏览器阻止，请手动点击播放按钮:', err);
-            });
+        // 跳转到B站链接的函数
+        function openBilibiliLink(bilibiliUrl) {
+            // 打开新标签页跳转到B站（保留当前网页）
+            window.open(bilibiliUrl, '_blank');
         }
-
-        function closeVideoPlayer() {
-            const modal = document.getElementById('videoModal');
-            const videoPlayer = document.getElementById('mainVideoPlayer');
-            const videoError提示 = document.getElementById('videoError提示');
-            
-            // 暂停视频并重置
-            videoPlayer.pause();
-            videoPlayer.currentTime = 0;
-            
-            // 隐藏错误提示
-            videoError提示.classList.add('hidden');
-            
-            // 隐藏模态框
-            modal.classList.add('hidden');
-            // 恢复页面滚动
-            document.body.style.overflow = '';
-        }
-
-        // 重新加载视频
-        function reloadVideo() {
-            const videoPlayer = document.getElementById('mainVideoPlayer');
-            const videoError提示 = document.getElementById('videoError提示');
-            
-            // 隐藏错误提示
-            videoError提示.classList.add('hidden');
-            
-            // 重新加载当前视频
-            videoPlayer.load();
-            videoPlayer.play().catch(err => {
-                console.log('重新加载后自动播放失败:', err);
-            });
-        }
-
-        // 监听视频播放错误
-        document.getElementById('mainVideoPlayer').addEventListener('error', function(e) {
-            const videoError提示 = document.getElementById('videoError提示');
-            console.error('视频播放错误:', e);
-            // 显示错误提示
-            videoError提示.classList.remove('hidden');
-        });
-
-        // 监听视频加载完成事件（确保画面能显示）
-        document.getElementById('mainVideoPlayer').addEventListener('loadeddata', function() {
-            const videoError提示 = document.getElementById('videoError提示');
-            videoError提示.classList.add('hidden');
-            console.log('视频画面加载完成');
-        });
-
-        // 点击模态框背景关闭视频
-        document.getElementById('videoModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeVideoPlayer();
-            }
-        });
-
-        // 键盘ESC关闭视频
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeVideoPlayer();
-            }
-        });
 
         // 页面加载完成后初始化所有功能
         document.addEventListener('DOMContentLoaded', () => {
